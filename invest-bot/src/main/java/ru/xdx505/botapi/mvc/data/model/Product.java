@@ -22,7 +22,6 @@ import java.time.ZonedDateTime;
 @Getter
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Product extends IdentifiableUUID {
   @Setter
@@ -52,13 +51,6 @@ public class Product extends IdentifiableUUID {
   @Max(735869)
   @Column(nullable = false)
   private Double price;
-
-  @CreatedDate
-  @Column(updatable = false)
-  private ZonedDateTime createdAt;
-
-  @LastModifiedDate
-  private ZonedDateTime updatedAt;
 
   public Double getConvertedTelegramPrice() {
     return BigDecimal.valueOf(this.price).multiply(BigDecimal.valueOf(100)).doubleValue();

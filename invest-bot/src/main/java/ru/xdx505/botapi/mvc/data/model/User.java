@@ -1,6 +1,7 @@
 package ru.xdx505.botapi.mvc.data.model;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -25,7 +26,6 @@ import java.util.Collection;
 @Getter
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class User extends IdentifiableUUID {
   @NonNull
@@ -52,11 +52,4 @@ public class User extends IdentifiableUUID {
   @Setter
   @OneToMany(fetch = FetchType.LAZY)
   private Collection<Order> orders;
-
-  @CreatedDate
-  @Column(updatable = false)
-  private ZonedDateTime createdAt;
-
-  @LastModifiedDate
-  private ZonedDateTime updatedAt;
 }

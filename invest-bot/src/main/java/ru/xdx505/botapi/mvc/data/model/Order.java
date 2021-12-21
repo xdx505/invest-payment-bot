@@ -22,7 +22,6 @@ import java.time.ZonedDateTime;
 @Getter
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Order extends IdentifiableUUID {
 
@@ -39,9 +38,6 @@ public class Order extends IdentifiableUUID {
   @NonNull
   @NotNull
   private Double purchasePrice;
-
-  @CreatedDate
-  private ZonedDateTime createdAt;
 
   @Setter
   @NotNull
