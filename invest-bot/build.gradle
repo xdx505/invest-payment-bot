@@ -1,0 +1,45 @@
+plugins {
+  id 'org.springframework.boot' version '2.6.1'
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'java'
+}
+
+group = 'ru.xdx505'
+version = '0.1'
+sourceCompatibility = '16'
+targetCompatibility = '16'
+
+bootRun.jvmArgs += ["-Dfile.encoding=UTF-8"]
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+ext {
+  set('telegramVersion', "5.3.0")
+  set('springCloudVersion', "2021.0.0")
+  set('javaxVersion', "2.0.1.Final")
+  set('modelMapperVersion', "2.4.3")
+  set('okhttpVersion', "3.10.0")
+}
+
+dependencies {
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+  implementation 'org.springframework.boot:spring-boot-devtools'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.apache.commons:commons-lang3'
+  implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+  implementation "javax.validation:validation-api:$javaxVersion"
+  implementation "org.modelmapper:modelmapper:$modelMapperVersion"
+  implementation "org.telegram:telegrambots-spring-boot-starter:$telegramVersion"
+  implementation project(':yoomoney-sdk-java')
+  runtimeOnly 'org.postgresql:postgresql'
+}
