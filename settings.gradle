@@ -1,0 +1,4 @@
+rootProject.name = 'invest-payment-bot'
+
+include 'invest-bot'
+include 'yoomoney-sdk-java'
