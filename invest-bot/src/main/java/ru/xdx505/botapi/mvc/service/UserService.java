@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.xdx505.botapi.mvc.constants.BotState;
 import ru.xdx505.botapi.mvc.data.model.User;
 import ru.xdx505.botapi.mvc.data.repository.UserRepository;
 
@@ -69,6 +70,20 @@ public class UserService {
 
   public Collection<User> getAllAdmins() {
     return userRepository.findAllAdmins();
+  }
+
+  public void saveIfNewUser(Long telegramId, String username) {
+    if (userRepository.findByTelegramId(telegramId).isEmpty()) {
+      var user = new User(telegramId, username);
+      if (userRepository.count() == 0) user.setAdmin(true);
+      userRepository.save(user);
+    }
+  }
+
+  public void updateState(Long telegramId, BotState newState) {
+    var user = userRepository.findByTelegramId(telegramId).orElseThrow(EntityNotFoundException::new);
+    user.setState(newState);
+    userRepository.save(user);
   }
 }
 
